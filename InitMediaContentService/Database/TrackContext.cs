@@ -1,5 +1,7 @@
 ﻿using InitMediaContentService.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using System.Reflection.Metadata;
 
 namespace InitMediaContentService.Database
 {
