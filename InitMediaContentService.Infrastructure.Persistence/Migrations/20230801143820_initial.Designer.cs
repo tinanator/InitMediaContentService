@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace InitMediaContentService.Migrations
 {
-    [DbContext(typeof(TrackContext))]
+    [DbContext(typeof(MediaContext))]
     [Migration("20230801143820_initial")]
     partial class initial
     {

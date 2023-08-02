@@ -1,15 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
+﻿using InitMediaContentService.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace InitMediaContentService.Database
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private TrackContext _context = null;
+        private MediaContext _context = null;
 
         private DbSet<T> dbSet = null;
 
-        public Repository(TrackContext context)
+        public Repository(MediaContext context)
         {
             _context = context;
             dbSet = context.Set<T>();

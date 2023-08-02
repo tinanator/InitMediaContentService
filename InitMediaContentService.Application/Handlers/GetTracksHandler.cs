@@ -1,4 +1,5 @@
 ﻿using InitMediaContentService.Database;
+using InitMediaContentService.Domain.Interfaces;
 using InitMediaContentService.Entities;
 using InitMediaContentService.Queries;
 using MediatR;

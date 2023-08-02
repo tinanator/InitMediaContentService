@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace InitMediaContentService.Migrations
 {
-    [DbContext(typeof(TrackContext))]
+    [DbContext(typeof(MediaContext))]
     partial class TrackContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

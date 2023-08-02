@@ -19,6 +19,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
     <PackageReference Include="Npgsql" Version="7.0.4" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
@@ -26,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InitMediaContentService.Application\InitMediaContentService.Application.csproj" />
+    <ProjectReference Include="..\InitMediaContentService.Domain\InitMediaContentService.Domain.csproj" />
     <ProjectReference Include="..\InitMediaContentService.Infrastructure.Persistence\InitMediaContentService.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 

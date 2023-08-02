@@ -1,4 +1,4 @@
-﻿namespace InitMediaContentService.Database
+﻿namespace InitMediaContentService.Domain.Interfaces
 {
     public interface IRepository<T> where T : class
     {
