@@ -1,5 +1,4 @@
-﻿using InitMediaContentService.Domain.Interfaces;
-using InitMediaContentService.Domain.Entities;
+﻿using InitMediaContentService.Domain.Entities;
 using InitMediaContentService.Database;
 
 namespace InitMediaContentService.Infrastructure.Persistence.Database
@@ -7,49 +6,24 @@ namespace InitMediaContentService.Infrastructure.Persistence.Database
     public class UnitOfWork
     {
         private MediaContext _mediaContext;
-        private IRepository<Artist> _artistRepository;
-        private IRepository<Release> _releaseRepository;
-        private IRepository<Track> _trackRepository;
+        public Repository<Artist> ArtistRepository { get; }
+        public Repository<Release> ReleaseRepository { get; }
+        public Repository<Track> TrackRepository { get; }
 
-        public UnitOfWork(MediaContext mediaContext)
+        public UnitOfWork(MediaContext mediaContext,
+            Repository<Artist> artistRepository,
+            Repository<Release> releaseRepository,
+            Repository<Track> trackRepository)
         {
             _mediaContext = mediaContext;
+            ArtistRepository = artistRepository;
+            ReleaseRepository = releaseRepository;
+            TrackRepository = trackRepository;
         }
 
-        public IRepository<Artist> ArtistRepository
+        public async Task SaveAsync(CancellationToken cancellationToken)
         {
-            get
-            {
-                if (_artistRepository == null)
-                {
-                    _artistRepository = new Repository<Artist>(_mediaContext);
-                }
-                return _artistRepository;
-            }
-        }
-
-        public IRepository<Release> ReleaseRepository
-        {
-            get
-            {
-                if (_releaseRepository == null)
-                {
-                    _releaseRepository = new Repository<Release>(_mediaContext);
-                }
-                return _releaseRepository;
-            }
-        }
-
-        public IRepository<Track> TrackRepository
-        {
-            get
-            {
-                if (_trackRepository == null)
-                {
-                    _trackRepository = new Repository<Track>(_mediaContext);
-                }
-                return _trackRepository;
-            }
+            await _mediaContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

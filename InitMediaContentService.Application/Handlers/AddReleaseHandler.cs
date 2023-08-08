@@ -1,20 +1,20 @@
 ﻿using InitMediaContentService.Application.Commands;
-using InitMediaContentService.Domain.Entities;
-using InitMediaContentService.Domain.Interfaces;
+using InitMediaContentService.Infrastructure.Persistence.Database;
 using MediatR;
 
 namespace InitMediaContentService.Application.Handlers
 {
     public class AddReleaseHandler : IRequestHandler<AddReleaseCommand>
     {
-        private readonly IRepository<Release> _trackRepository;
-        public AddReleaseHandler(IRepository<Release> trackRepository)
+        private readonly UnitOfWork _unitOfWork;
+        public AddReleaseHandler(UnitOfWork unitOfWork)
         {
-            _trackRepository = trackRepository;
+            _unitOfWork = unitOfWork;
         }
-        public Task Handle(AddReleaseCommand request, CancellationToken cancellationToken)
+        public async Task Handle(AddReleaseCommand request, CancellationToken cancellationToken)
         {
-            return _trackRepository.InsertAsync(request.release, cancellationToken);
+            _unitOfWork.ReleaseRepository.InsertAsync(request.release);
+            await _unitOfWork.SaveAsync(cancellationToken);
         }
     }
 }

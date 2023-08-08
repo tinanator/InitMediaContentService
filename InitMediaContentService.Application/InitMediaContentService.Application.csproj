@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InitMediaContentService.Domain\InitMediaContentService.Domain.csproj" />
+    <ProjectReference Include="..\InitMediaContentService.Infrastructure.Persistence\InitMediaContentService.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

@@ -12,6 +12,7 @@ namespace InitMediaContentService.Infrastructure.Persistence.Extensions
             services.AddScoped<IRepository<Track>, Repository<Track>>();
             services.AddScoped<IRepository<Release>, Repository<Release>>();
             services.AddScoped<IRepository<Artist>, Repository<Artist>>();
+            services.AddScoped<UnitOfWork>();
 
             return services;
         }

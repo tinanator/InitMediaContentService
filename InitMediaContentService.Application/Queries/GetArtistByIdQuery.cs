@@ -5,6 +5,5 @@ namespace InitMediaContentService.Application.Queries
 {
     public record GetArtistByIdQuery(int id) : IRequest<Artist>
     {
-
     }
 }
