@@ -1,7 +1,8 @@
-﻿using InitMediaContentService.Domain.Interfaces;
+﻿using InitMediaContentService.Database;
+using InitMediaContentService.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace InitMediaContentService.Database
+namespace InitMediaContentService.Infrastructure.Persistence.Database
 {
     public class Repository<T> : IRepository<T> where T : class
     {
@@ -25,10 +26,9 @@ namespace InitMediaContentService.Database
             return await dbSet.FindAsync(id, cancellationToken);
         }
 
-        public async Task InsertAsync(T obj, CancellationToken cancellationToken)
+        public void InsertAsync(T obj)
         {
-            await dbSet.AddAsync(obj, cancellationToken);
-            await _context.SaveChangesAsync(cancellationToken);
+            dbSet.Add(obj);
         }
 
         public void Update(T obj)
@@ -47,7 +47,6 @@ namespace InitMediaContentService.Database
             }
 
             dbSet.Remove(existing);
-            await _context.SaveChangesAsync(cancellationToken);
         }
 
         public async Task SaveAsync(CancellationToken cancellationToken)

@@ -1,4 +1,4 @@
-﻿namespace InitMediaContentService.Entities
+﻿namespace InitMediaContentService.Domain.Entities
 {
     public class Release
     {
