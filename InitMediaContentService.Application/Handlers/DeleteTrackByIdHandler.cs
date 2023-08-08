@@ -1,10 +1,9 @@
-﻿using InitMediaContentService.Commands;
-using InitMediaContentService.Database;
+﻿using InitMediaContentService.Application.Commands;
+using InitMediaContentService.Domain.Entities;
 using InitMediaContentService.Domain.Interfaces;
-using InitMediaContentService.Entities;
 using MediatR;
 
-namespace InitMediaContentService.Handlers
+namespace InitMediaContentService.Application.Handlers
 {
     public class DeleteTrackByIdHandler : IRequestHandler<DeleteTrackByIdCommand>
     {

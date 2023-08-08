@@ -1,4 +1,4 @@
-﻿using InitMediaContentService.Entities;
+﻿using InitMediaContentService.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace InitMediaContentService.Database

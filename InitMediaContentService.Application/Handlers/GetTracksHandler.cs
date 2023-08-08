@@ -1,10 +1,9 @@
-﻿using InitMediaContentService.Database;
+﻿using InitMediaContentService.Application.Queries;
+using InitMediaContentService.Domain.Entities;
 using InitMediaContentService.Domain.Interfaces;
-using InitMediaContentService.Entities;
-using InitMediaContentService.Queries;
 using MediatR;
 
-namespace InitMediaContentService.Handlers
+namespace InitMediaContentService.Application.Handlers
 {
     public class GetTracksHandler : IRequestHandler<GetTracksQuery, IEnumerable<Track>>
     {

@@ -1,7 +1,7 @@
-﻿using InitMediaContentService.Database;
-using InitMediaContentService.Domain.Interfaces;
-using InitMediaContentService.Entities;
+﻿using InitMediaContentService.Domain.Interfaces;
+using InitMediaContentService.Domain.Entities;
 using Microsoft.Extensions.DependencyInjection;
+using InitMediaContentService.Infrastructure.Persistence.Database;
 
 namespace InitMediaContentService.Infrastructure.Persistence.Extensions
 {

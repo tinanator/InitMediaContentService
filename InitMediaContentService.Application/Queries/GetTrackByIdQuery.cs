@@ -1,7 +1,7 @@
-﻿using InitMediaContentService.Entities;
+﻿using InitMediaContentService.Domain.Entities;
 using MediatR;
 
-namespace InitMediaContentService.Queries
+namespace InitMediaContentService.Application.Queries
 {
     public record GetTrackByIdQuery(int id) : IRequest<Track>
     {

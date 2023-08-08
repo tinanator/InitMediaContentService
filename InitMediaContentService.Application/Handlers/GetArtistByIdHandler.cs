@@ -1,11 +1,9 @@
-﻿
-using InitMediaContentService.Database;
-using InitMediaContentService.Domain.Interfaces;
-using InitMediaContentService.Entities;
-using InitMediaContentService.Queries;
+﻿using InitMediaContentService.Domain.Interfaces;
+using InitMediaContentService.Domain.Entities;
 using MediatR;
+using InitMediaContentService.Application.Queries;
 
-namespace InitMediaContentService.Handlers
+namespace InitMediaContentService.Application.Handlers
 {
     public class GetArtistByIdHandler : IRequestHandler<GetArtistByIdQuery, Artist>
     {

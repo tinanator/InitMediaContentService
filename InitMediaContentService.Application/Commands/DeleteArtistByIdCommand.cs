@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace InitMediaContentService.Commands
+namespace InitMediaContentService.Application.Commands
 {
     public record DeleteArtistByIdCommand(int id) : IRequest
     {

@@ -1,12 +1,12 @@
 using InitMediaContentService.Application.Extensions;
-using InitMediaContentService.Commands;
 using InitMediaContentService.Domain.Extensions;
-using InitMediaContentService.Entities;
+using InitMediaContentService.Domain.Entities;
 using InitMediaContentService.Infrastructure.Persistence.Extensions;
-using InitMediaContentService.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using InitMediaContentService.Application.Queries;
+using InitMediaContentService.Application.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 

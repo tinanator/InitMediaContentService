@@ -1,7 +1,6 @@
-﻿using InitMediaContentService.Entities;
-using MediatR;
+﻿using MediatR;
 
-namespace InitMediaContentService.Commands
+namespace InitMediaContentService.Application.Commands
 {
     public record DeleteTrackByIdCommand(int id) : IRequest
     {
