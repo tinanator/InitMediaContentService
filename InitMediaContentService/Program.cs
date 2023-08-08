@@ -12,6 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMediaContext(builder.Configuration.GetConnectionString("InitMediaContextConnection"));
 
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
+
 builder.Services.AddRepositories();
 
 builder.Services.AddApplicationCore();
