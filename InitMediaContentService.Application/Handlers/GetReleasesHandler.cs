@@ -1,20 +1,24 @@
-﻿using InitMediaContentService.Application.Queries;
-using InitMediaContentService.Domain.Entities;
-using InitMediaContentService.Infrastructure.Persistence.Database;
+﻿using InitMediaContentService.Application.DTOs;
+using InitMediaContentService.Application.Mappers;
+using InitMediaContentService.Application.Queries;
+using InitMediaContentService.Domain.Interfaces;
 using MediatR;
 
 namespace InitMediaContentService.Application.Handlers
 {
-    public class GetReleasesHandler : IRequestHandler<GetReleasesQuery, IEnumerable<Release>>
+    public class GetReleasesHandler : IRequestHandler<GetReleasesQuery, IEnumerable<ReleaseDTO>>
     {
-        private readonly UnitOfWork _unitOfWork;
-        public GetReleasesHandler(UnitOfWork unitOfWork)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly ReleaseMapper _releaseMapper;
+        public GetReleasesHandler(IUnitOfWork unitOfWork, ReleaseMapper releaseMapper)
         {
             _unitOfWork = unitOfWork;
+            _releaseMapper = releaseMapper;
         }
-        public Task<IEnumerable<Release>> Handle(GetReleasesQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ReleaseDTO>> Handle(GetReleasesQuery request, CancellationToken cancellationToken)
         {
-            return _unitOfWork.ReleaseRepository.GetAllAsync(cancellationToken);
+            var releases = await _unitOfWork.ReleaseRepository.GetAllAsync(cancellationToken);
+            return releases.Select(release => _releaseMapper.ReleaseToReleaseDTO(release));
         }
     }
 }

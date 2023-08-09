@@ -1,9 +1,9 @@
-﻿using InitMediaContentService.Domain.Entities;
+﻿using InitMediaContentService.Application.DTOs;
 using MediatR;
 
 namespace InitMediaContentService.Application.Commands
 {
-    public record AddReleaseCommand(Release release) : IRequest
+    public record AddReleaseCommand(ReleaseDTO releaseDTO) : IRequest
     {
     }
 }

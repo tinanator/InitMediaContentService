@@ -1,13 +1,13 @@
 ﻿using InitMediaContentService.Application.Commands;
-using InitMediaContentService.Infrastructure.Persistence.Database;
+using InitMediaContentService.Domain.Interfaces;
 using MediatR;
 
 namespace InitMediaContentService.Application.Handlers
 {
     public class DeleteReleaseByIdHandler : IRequestHandler<DeleteReleaseByIdCommand>
     {
-        private readonly UnitOfWork _unitOfWork;
-        public DeleteReleaseByIdHandler(UnitOfWork unitOfWork)
+        private readonly IUnitOfWork _unitOfWork;
+        public DeleteReleaseByIdHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

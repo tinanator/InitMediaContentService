@@ -1,19 +1,20 @@
 ﻿using InitMediaContentService.Domain.Entities;
 using InitMediaContentService.Database;
+using InitMediaContentService.Domain.Interfaces;
 
 namespace InitMediaContentService.Infrastructure.Persistence.Database
 { 
-    public class UnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private MediaContext _mediaContext;
-        public Repository<Artist> ArtistRepository { get; }
-        public Repository<Release> ReleaseRepository { get; }
-        public Repository<Track> TrackRepository { get; }
+        public IRepository<Artist> ArtistRepository { get; }
+        public IRepository<Release> ReleaseRepository { get; }
+        public IRepository<Track> TrackRepository { get; }
 
         public UnitOfWork(MediaContext mediaContext,
-            Repository<Artist> artistRepository,
-            Repository<Release> releaseRepository,
-            Repository<Track> trackRepository)
+            IRepository<Artist> artistRepository,
+            IRepository<Release> releaseRepository,
+            IRepository<Track> trackRepository)
         {
             _mediaContext = mediaContext;
             ArtistRepository = artistRepository;

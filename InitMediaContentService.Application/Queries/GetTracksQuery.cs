@@ -1,9 +1,9 @@
-﻿using InitMediaContentService.Domain.Entities;
+﻿using InitMediaContentService.Application.DTOs;
 using MediatR;
 
 namespace InitMediaContentService.Application.Queries
 {
-    public record GetTracksQuery() : IRequest<IEnumerable<Track>>
+    public record GetTracksQuery() : IRequest<IEnumerable<TrackDTO>>
     {
     }
 }

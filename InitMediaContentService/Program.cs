@@ -1,12 +1,12 @@
 using InitMediaContentService.Application.Extensions;
 using InitMediaContentService.Domain.Extensions;
-using InitMediaContentService.Domain.Entities;
 using InitMediaContentService.Infrastructure.Persistence.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InitMediaContentService.Application.Queries;
 using InitMediaContentService.Application.Commands;
+using InitMediaContentService.Application.DTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,19 +52,19 @@ app.MapGet("/artists", async (IMediator mediator) =>
     return await mediator.Send(new GetArtistsQuery());
 });
 
-app.MapPost("artists/create", async (IMediator mediator, [FromBody] Artist artist) =>
+app.MapPost("artists/create", async (IMediator mediator, [FromBody] ArtistDTO artistDTO) =>
 {
-    await mediator.Send(new AddArtistCommand(artist));
+    await mediator.Send(new AddArtistCommand(artistDTO));
 });
 
-app.MapPost("releases/create", async (IMediator mediator, [FromBody] Release release) =>
+app.MapPost("releases/create", async (IMediator mediator, [FromBody] ReleaseDTO releaseDTO) =>
 {
-    await mediator.Send(new AddReleaseCommand(release));
+    await mediator.Send(new AddReleaseCommand(releaseDTO));
 });
 
-app.MapPost("tracks/create", async (IMediator mediator, [FromBody] Track track) =>
+app.MapPost("tracks/create", async (IMediator mediator, [FromBody] TrackDTO trackDTO) =>
 {
-    await mediator.Send(new AddTrackCommand(track));
+    await mediator.Send(new AddTrackCommand(trackDTO));
 });
 
 app.MapDelete("tracks/{id}", async (IMediator mediator, [FromBody] DeleteTrackByIdCommand command) =>

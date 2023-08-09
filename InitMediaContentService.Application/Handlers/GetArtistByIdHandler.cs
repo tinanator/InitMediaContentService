@@ -1,21 +1,25 @@
 ﻿using InitMediaContentService.Domain.Interfaces;
-using InitMediaContentService.Domain.Entities;
 using MediatR;
 using InitMediaContentService.Application.Queries;
-using InitMediaContentService.Infrastructure.Persistence.Database;
+using InitMediaContentService.Application.DTOs;
+using InitMediaContentService.Application.Mappers;
 
 namespace InitMediaContentService.Application.Handlers
 {
-    public class GetArtistByIdHandler : IRequestHandler<GetArtistByIdQuery, Artist>
+    public class GetArtistByIdHandler : IRequestHandler<GetArtistByIdQuery, ArtistDTO>
     {
-        private readonly UnitOfWork _unitOfWork;
-        public GetArtistByIdHandler(UnitOfWork unitOfWork)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly ArtistMapper _artistMapper;
+        public GetArtistByIdHandler(IUnitOfWork unitOfWork, ArtistMapper artistMapper)
         {
             _unitOfWork = unitOfWork;
+            _artistMapper = artistMapper;
         }
-        public async Task<Artist> Handle(GetArtistByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ArtistDTO> Handle(GetArtistByIdQuery request, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.ArtistRepository.FindByIdAsync(request.id, cancellationToken);
+            return _artistMapper.ArtistToArtistDTO(
+                await _unitOfWork.ArtistRepository.FindByIdAsync(request.id, cancellationToken)
+                );
         }
     }
 }

@@ -1,20 +1,26 @@
-﻿using InitMediaContentService.Application.Queries;
+﻿using InitMediaContentService.Application.DTOs;
+using InitMediaContentService.Application.Mappers;
+using InitMediaContentService.Application.Queries;
 using InitMediaContentService.Domain.Entities;
-using InitMediaContentService.Infrastructure.Persistence.Database;
+using InitMediaContentService.Domain.Interfaces;
 using MediatR;
 
 namespace InitMediaContentService.Application.Handlers
 {
-    public class GetTrackByIdHandler : IRequestHandler<GetTrackByIdQuery, Track>
+    public class GetTrackByIdHandler : IRequestHandler<GetTrackByIdQuery, TrackDTO>
     {
-        private readonly UnitOfWork _unitOfWork;
-        public GetTrackByIdHandler(UnitOfWork unitOfWork)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly TrackMapper _trackMapper;
+        public GetTrackByIdHandler(IUnitOfWork unitOfWork, TrackMapper trackMapper)
         {
             _unitOfWork = unitOfWork;
+            _trackMapper = trackMapper;
         }
-        public Task<Track> Handle(GetTrackByIdQuery request, CancellationToken cancellationToken)
+        public async Task<TrackDTO> Handle(GetTrackByIdQuery request, CancellationToken cancellationToken)
         {
-            return _unitOfWork.TrackRepository.FindByIdAsync(request.id, cancellationToken);
+            return _trackMapper.TrackToTrackDTO(
+                await _unitOfWork.TrackRepository.FindByIdAsync(request.id, cancellationToken)
+                );
         }
     }
 }
