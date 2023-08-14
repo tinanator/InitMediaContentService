@@ -4,10 +4,10 @@ using MediatR;
 
 namespace InitMediaContentService.Application.Handlers
 {
-    public class DeleteTrackByIdHandler : IRequestHandler<DeleteTrackByIdCommand>
+    public class DeleteTrackByIdCommandHandler : IRequestHandler<DeleteTrackByIdCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public DeleteTrackByIdHandler(IUnitOfWork unitOfWork)
+        public DeleteTrackByIdCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

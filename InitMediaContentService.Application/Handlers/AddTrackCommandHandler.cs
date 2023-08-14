@@ -5,11 +5,11 @@ using MediatR;
 
 namespace InitMediaContentService.Application.Handlers
 {
-    public class AddTrackHandler : IRequestHandler<AddTrackCommand>
+    public class AddTrackCommandHandler : IRequestHandler<AddTrackCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly TrackMapper _trackMapper;
-        public AddTrackHandler(IUnitOfWork unitOfWork, TrackMapper trackMapper)
+        public AddTrackCommandHandler(IUnitOfWork unitOfWork, TrackMapper trackMapper)
         {
             _unitOfWork = unitOfWork;
             _trackMapper = trackMapper;

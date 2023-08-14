@@ -7,11 +7,11 @@ using MediatR;
 
 namespace InitMediaContentService.Application.Handlers
 {
-    public class GetArtistsHandler : IRequestHandler<GetArtistsQuery, IEnumerable<ArtistDTO>>
+    public class GetArtistsQueryHandler : IRequestHandler<GetArtistsQuery, IEnumerable<ArtistDTO>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ArtistMapper _artistMapper;
-        public GetArtistsHandler(IUnitOfWork unitOfWork, ArtistMapper artistMapper)
+        public GetArtistsQueryHandler(IUnitOfWork unitOfWork, ArtistMapper artistMapper)
         {
             _unitOfWork = unitOfWork;
             _artistMapper = artistMapper;

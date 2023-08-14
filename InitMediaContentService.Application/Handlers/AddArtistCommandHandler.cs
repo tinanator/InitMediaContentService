@@ -5,11 +5,11 @@ using MediatR;
 
 namespace InitMediaContentService.Application.Handlers
 {
-    public class AddArtistHandler : IRequestHandler<AddArtistCommand>
+    public class AddArtistCommandHandler : IRequestHandler<AddArtistCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ArtistMapper _artistMapper;
-        public AddArtistHandler(IUnitOfWork unitOfWork, ArtistMapper artistMapper)
+        public AddArtistCommandHandler(IUnitOfWork unitOfWork, ArtistMapper artistMapper)
         {
             _unitOfWork = unitOfWork;
             _artistMapper = artistMapper;

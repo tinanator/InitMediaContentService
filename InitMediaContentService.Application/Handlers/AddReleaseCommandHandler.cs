@@ -5,11 +5,11 @@ using MediatR;
 
 namespace InitMediaContentService.Application.Handlers
 {
-    public class AddReleaseHandler : IRequestHandler<AddReleaseCommand>
+    public class AddReleaseCommandHandler : IRequestHandler<AddReleaseCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ReleaseMapper _releaseMapper;
-        public AddReleaseHandler(IUnitOfWork unitOfWork, ReleaseMapper releaseMapper)
+        public AddReleaseCommandHandler(IUnitOfWork unitOfWork, ReleaseMapper releaseMapper)
         {
             _unitOfWork = unitOfWork;
             _releaseMapper = releaseMapper;

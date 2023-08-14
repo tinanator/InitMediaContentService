@@ -6,11 +6,11 @@ using MediatR;
 
 namespace InitMediaContentService.Application.Handlers
 {
-    public class GetReleaseByIdHandler : IRequestHandler<GetReleaseByIdQuery, ReleaseDTO>
+    public class GetReleaseByIdQueryHandler : IRequestHandler<GetReleaseByIdQuery, ReleaseDTO>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ReleaseMapper _releaseMapper;
-        public GetReleaseByIdHandler(IUnitOfWork unitOfWork, ReleaseMapper releaseMapper)
+        public GetReleaseByIdQueryHandler(IUnitOfWork unitOfWork, ReleaseMapper releaseMapper)
         {
             _unitOfWork = unitOfWork;
             _releaseMapper = releaseMapper;

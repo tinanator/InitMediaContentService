@@ -7,19 +7,20 @@ using MediatR;
 
 namespace InitMediaContentService.Application.Handlers
 {
-    public class GetTracksHandler : IRequestHandler<GetTracksQuery, IEnumerable<TrackDTO>>
+    public class GetTrackByIdQueryHandler : IRequestHandler<GetTrackByIdQuery, TrackDTO>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly TrackMapper _trackMapper;
-        public GetTracksHandler(IUnitOfWork unitOfWork, TrackMapper trackMapper)
+        public GetTrackByIdQueryHandler(IUnitOfWork unitOfWork, TrackMapper trackMapper)
         {
             _unitOfWork = unitOfWork;
             _trackMapper = trackMapper;
         }
-        public async Task<IEnumerable<TrackDTO>> Handle(GetTracksQuery request, CancellationToken cancellationToken)
+        public async Task<TrackDTO> Handle(GetTrackByIdQuery request, CancellationToken cancellationToken)
         {
-            var tracks = await _unitOfWork.TrackRepository.GetAllAsync(cancellationToken);
-            return tracks.Select(track => _trackMapper.TrackToTrackDTO(track));
+            return _trackMapper.TrackToTrackDTO(
+                await _unitOfWork.TrackRepository.FindByIdAsync(request.id, cancellationToken)
+                );
         }
     }
 }

@@ -6,11 +6,11 @@ using InitMediaContentService.Application.Mappers;
 
 namespace InitMediaContentService.Application.Handlers
 {
-    public class GetArtistByIdHandler : IRequestHandler<GetArtistByIdQuery, ArtistDTO>
+    public class GetArtistByIdQueryHandler : IRequestHandler<GetArtistByIdQuery, ArtistDTO>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ArtistMapper _artistMapper;
-        public GetArtistByIdHandler(IUnitOfWork unitOfWork, ArtistMapper artistMapper)
+        public GetArtistByIdQueryHandler(IUnitOfWork unitOfWork, ArtistMapper artistMapper)
         {
             _unitOfWork = unitOfWork;
             _artistMapper = artistMapper;
