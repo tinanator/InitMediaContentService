@@ -3,76 +3,87 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace InitMediaContentService.Migrations
+namespace InitMediaContentService.Domain.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Artists",
+                name: "Artist",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Name = table.Column<string>(type: "text", nullable: false)
+                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Artists", x => x.Id);
+                    table.PrimaryKey("PK_Artist", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Releases",
+                name: "Release",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
                     ArtistId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Releases", x => x.Id);
+                    table.PrimaryKey("PK_Artist", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Releases_Artists_ArtistId",
+                        name: "FK_Release_Artist_ArtistId",
                         column: x => x.ArtistId,
-                        principalTable: "Artists",
+                        principalTable: "Artist",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tracks",
+                name: "Track",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
                     ArtistId = table.Column<int>(type: "integer", nullable: false),
                     ReleaseId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tracks", x => x.Id);
+                    table.PrimaryKey("PK_Artist", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tracks_Releases_ReleaseId",
+                        name: "FK_Track_Artist_ArtistId",
+                        column: x => x.ArtistId,
+                        principalTable: "Artist",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Track_Release_ReleaseId",
                         column: x => x.ReleaseId,
-                        principalTable: "Releases",
+                        principalTable: "Release",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Releases_ArtistId",
-                table: "Releases",
+                name: "IX_Release_ArtistId",
+                table: "Release",
                 column: "ArtistId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tracks_ReleaseId",
-                table: "Tracks",
+                name: "IX_Track_ArtistId",
+                table: "Track",
+                column: "ArtistId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Track_ReleaseId",
+                table: "Track",
                 column: "ReleaseId");
         }
 
@@ -80,13 +91,13 @@ namespace InitMediaContentService.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Tracks");
+                name: "Track");
 
             migrationBuilder.DropTable(
-                name: "Releases");
+                name: "Release");
 
             migrationBuilder.DropTable(
-                name: "Artists");
+                name: "Artist");
         }
     }
 }

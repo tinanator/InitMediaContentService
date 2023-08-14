@@ -2,20 +2,17 @@
 using InitMediaContentService.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace InitMediaContentService.Migrations
+namespace InitMediaContentService.Domain.Migrations
 {
     [DbContext(typeof(MediaContext))]
-    [Migration("20230801143820_initial")]
-    partial class initial
+    partial class MediaContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,7 +21,7 @@ namespace InitMediaContentService.Migrations
 
             NpgsqlModelBuilderExtensions.UseSerialColumns(modelBuilder);
 
-            modelBuilder.Entity("InitMediaContentService.Entities.Artist", b =>
+            modelBuilder.Entity("InitMediaContentService.Domain.Entities.Artist", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,14 +31,16 @@ namespace InitMediaContentService.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("PK_Artist");
 
-                    b.ToTable("Artists");
+                    b.ToTable("Artist", (string)null);
                 });
 
-            modelBuilder.Entity("InitMediaContentService.Entities.Release", b =>
+            modelBuilder.Entity("InitMediaContentService.Domain.Entities.Release", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -54,16 +53,18 @@ namespace InitMediaContentService.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("PK_Artist");
 
                     b.HasIndex("ArtistId");
 
-                    b.ToTable("Releases");
+                    b.ToTable("Release", (string)null);
                 });
 
-            modelBuilder.Entity("InitMediaContentService.Entities.Track", b =>
+            modelBuilder.Entity("InitMediaContentService.Domain.Entities.Track", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -76,21 +77,25 @@ namespace InitMediaContentService.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<int>("ReleaseId")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("PK_Artist");
+
+                    b.HasIndex("ArtistId");
 
                     b.HasIndex("ReleaseId");
 
-                    b.ToTable("Tracks");
+                    b.ToTable("Track", (string)null);
                 });
 
-            modelBuilder.Entity("InitMediaContentService.Entities.Release", b =>
+            modelBuilder.Entity("InitMediaContentService.Domain.Entities.Release", b =>
                 {
-                    b.HasOne("InitMediaContentService.Entities.Artist", "Artist")
+                    b.HasOne("InitMediaContentService.Domain.Entities.Artist", "Artist")
                         .WithMany("Releases")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -99,21 +104,33 @@ namespace InitMediaContentService.Migrations
                     b.Navigation("Artist");
                 });
 
-            modelBuilder.Entity("InitMediaContentService.Entities.Track", b =>
+            modelBuilder.Entity("InitMediaContentService.Domain.Entities.Track", b =>
                 {
-                    b.HasOne("InitMediaContentService.Entities.Release", null)
+                    b.HasOne("InitMediaContentService.Domain.Entities.Artist", "Artist")
+                        .WithMany("Tracks")
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("InitMediaContentService.Domain.Entities.Release", "Release")
                         .WithMany("Tracks")
                         .HasForeignKey("ReleaseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Artist");
+
+                    b.Navigation("Release");
                 });
 
-            modelBuilder.Entity("InitMediaContentService.Entities.Artist", b =>
+            modelBuilder.Entity("InitMediaContentService.Domain.Entities.Artist", b =>
                 {
                     b.Navigation("Releases");
+
+                    b.Navigation("Tracks");
                 });
 
-            modelBuilder.Entity("InitMediaContentService.Entities.Release", b =>
+            modelBuilder.Entity("InitMediaContentService.Domain.Entities.Release", b =>
                 {
                     b.Navigation("Tracks");
                 });
