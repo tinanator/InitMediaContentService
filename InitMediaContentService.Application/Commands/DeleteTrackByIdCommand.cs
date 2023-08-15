@@ -2,7 +2,7 @@
 
 namespace InitMediaContentService.Application.Commands
 {
-    public record DeleteTrackByIdCommand(int id) : IRequest
+    public record DeleteTrackByIdCommand(Guid id) : IRequest
     {
     }
 }

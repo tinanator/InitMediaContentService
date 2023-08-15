@@ -7,14 +7,14 @@ namespace InitMediaContentService.Infrastructure.Persistence.Database
     public class UnitOfWork : IUnitOfWork
     {
         private MediaContext _mediaContext;
-        public IRepository<Artist> ArtistRepository { get; }
-        public IRepository<Release> ReleaseRepository { get; }
-        public IRepository<Track> TrackRepository { get; }
+        public IRepository<Artist, Guid> ArtistRepository { get; }
+        public IRepository<Release, Guid> ReleaseRepository { get; }
+        public IRepository<Track, Guid> TrackRepository { get; }
 
         public UnitOfWork(MediaContext mediaContext,
-            IRepository<Artist> artistRepository,
-            IRepository<Release> releaseRepository,
-            IRepository<Track> trackRepository)
+            IRepository<Artist, Guid> artistRepository,
+            IRepository<Release, Guid> releaseRepository,
+            IRepository<Track, Guid> trackRepository)
         {
             _mediaContext = mediaContext;
             ArtistRepository = artistRepository;

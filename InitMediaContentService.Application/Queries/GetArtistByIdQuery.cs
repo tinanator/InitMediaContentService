@@ -3,7 +3,7 @@ using MediatR;
 
 namespace InitMediaContentService.Application.Queries
 {
-    public record GetArtistByIdQuery(int id) : IRequest<ArtistDTO>
+    public record GetArtistByIdQuery(Guid id) : IRequest<ArtistDTO>
     {
     }
 }

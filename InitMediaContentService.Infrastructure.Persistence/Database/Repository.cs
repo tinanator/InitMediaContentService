@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InitMediaContentService.Infrastructure.Persistence.Database
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<T, K> : IRepository<T, K> where T : class
     {
         private MediaContext _context;
 
@@ -18,7 +18,7 @@ namespace InitMediaContentService.Infrastructure.Persistence.Database
             return await _context.Set<T>().ToListAsync(cancellationToken);
         }
 
-        public async Task<T?> FindByIdAsync(object id, CancellationToken cancellationToken)
+        public async Task<T?> FindByIdAsync(K id, CancellationToken cancellationToken)
         {
             return await _context.Set<T>().FindAsync(id, cancellationToken);
         }
@@ -34,7 +34,7 @@ namespace InitMediaContentService.Infrastructure.Persistence.Database
             _context.Entry(obj).State = EntityState.Modified;
         }
 
-        public async Task DeleteAsync(object id, CancellationToken cancellationToken)
+        public async Task DeleteAsync(K id, CancellationToken cancellationToken)
         {
             T? existing = await _context.Set<T>().FindAsync(id, cancellationToken);
 
