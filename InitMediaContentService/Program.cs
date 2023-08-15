@@ -52,19 +52,19 @@ app.MapGet("/artists", async (IMediator mediator) =>
     return await mediator.Send(new GetArtistsQuery());
 });
 
-app.MapPost("artists/create", async (IMediator mediator, [FromBody] ArtistDTO artistDTO) =>
+app.MapPost("artists", async (IMediator mediator, [FromBody] ArtistDTO artistDTO) =>
 {
-    await mediator.Send(new AddArtistCommand(artistDTO));
+    return await mediator.Send(new AddArtistCommand(artistDTO));
 });
 
-app.MapPost("releases/create", async (IMediator mediator, [FromBody] ReleaseDTO releaseDTO) =>
+app.MapPost("releases", async (IMediator mediator, [FromBody] ReleaseDTO releaseDTO) =>
 {
-    await mediator.Send(new AddReleaseCommand(releaseDTO));
+    return await mediator.Send(new AddReleaseCommand(releaseDTO));
 });
 
-app.MapPost("tracks/create", async (IMediator mediator, [FromBody] TrackDTO trackDTO) =>
+app.MapPost("tracks", async (IMediator mediator, [FromBody] TrackDTO trackDTO) =>
 {
-    await mediator.Send(new AddTrackCommand(trackDTO));
+    return await mediator.Send(new AddTrackCommand(trackDTO));
 });
 
 app.MapDelete("tracks/{id}", async (IMediator mediator, [FromBody] DeleteTrackByIdCommand command) =>

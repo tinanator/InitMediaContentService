@@ -1,6 +1,7 @@
 ﻿using InitMediaContentService.Database;
 using InitMediaContentService.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace InitMediaContentService.Infrastructure.Persistence.Database
 {
@@ -23,9 +24,9 @@ namespace InitMediaContentService.Infrastructure.Persistence.Database
             return await _context.Set<T>().FindAsync(id, cancellationToken);
         }
 
-        public void Insert(T obj)
+        public EntityEntry<T> Insert(T obj)
         {
-            _context.Set<T>().Add(obj);
+            return _context.Set<T>().Add(obj);
         }
 
         public void Update(T obj)

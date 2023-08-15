@@ -3,7 +3,7 @@ using MediatR;
 
 namespace InitMediaContentService.Application.Commands
 {
-    public record AddTrackCommand(TrackDTO trackDTO) : IRequest
+    public record AddTrackCommand(TrackDTO trackDTO) : IRequest<TrackDTO>
     {
     }
 }
