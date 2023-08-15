@@ -1,6 +1,7 @@
 ﻿using InitMediaContentService.Application.Commands;
 using InitMediaContentService.Application.Mappers;
 using InitMediaContentService.Domain.Interfaces;
+using MassTransit;
 using MediatR;
 
 namespace InitMediaContentService.Application.Handlers
@@ -16,6 +17,7 @@ namespace InitMediaContentService.Application.Handlers
         }
         public async Task Handle(AddReleaseCommand request, CancellationToken cancellationToken)
         {
+            request.releaseDTO.Id = NewId.NextGuid();
             _unitOfWork.ReleaseRepository.Insert(_releaseMapper.ReleaseDTOToRelease(request.releaseDTO));
             await _unitOfWork.SaveAsync(cancellationToken);
         }

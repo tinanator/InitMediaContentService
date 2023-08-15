@@ -1,6 +1,7 @@
 ﻿using InitMediaContentService.Application.Commands;
 using InitMediaContentService.Application.Mappers;
 using InitMediaContentService.Domain.Interfaces;
+using MassTransit;
 using MediatR;
 
 namespace InitMediaContentService.Application.Handlers
@@ -16,6 +17,7 @@ namespace InitMediaContentService.Application.Handlers
         }
         public async Task Handle(AddTrackCommand request, CancellationToken cancellationToken)
         {
+            request.trackDTO.Id = NewId.NextGuid();
             _unitOfWork.TrackRepository.Insert(_trackMapper.TrackDTOToTrack(request.trackDTO));
             await _unitOfWork.SaveAsync(cancellationToken);
         }

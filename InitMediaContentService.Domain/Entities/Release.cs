@@ -1,8 +1,10 @@
-﻿namespace InitMediaContentService.Domain.Entities
+﻿using MassTransit;
+
+namespace InitMediaContentService.Domain.Entities
 {
     public class Release
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public int ArtistId { get; set; }
         public Artist Artist { get; set; }
