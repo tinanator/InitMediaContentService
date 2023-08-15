@@ -16,7 +16,7 @@ namespace InitMediaContentService.Application.Handlers
         }
         public async Task Handle(AddReleaseCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork.ReleaseRepository.InsertAsync(_releaseMapper.ReleaseDTOToRelease(request.releaseDTO));
+            _unitOfWork.ReleaseRepository.Insert(_releaseMapper.ReleaseDTOToRelease(request.releaseDTO));
             await _unitOfWork.SaveAsync(cancellationToken);
         }
     }

@@ -16,7 +16,7 @@ namespace InitMediaContentService.Application.Handlers
         }
         public async Task Handle(AddTrackCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork.TrackRepository.InsertAsync(_trackMapper.TrackDTOToTrack(request.trackDTO));
+            _unitOfWork.TrackRepository.Insert(_trackMapper.TrackDTOToTrack(request.trackDTO));
             await _unitOfWork.SaveAsync(cancellationToken);
         }
     }

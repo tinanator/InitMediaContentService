@@ -16,7 +16,7 @@ namespace InitMediaContentService.Application.Handlers
         }
         public async Task Handle(AddArtistCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork.ArtistRepository.InsertAsync(_artistMapper.ArtistDTOToArtist(request.artistDTO));
+            _unitOfWork.ArtistRepository.Insert(_artistMapper.ArtistDTOToArtist(request.artistDTO));
             await _unitOfWork.SaveAsync(cancellationToken);
         }
     }
