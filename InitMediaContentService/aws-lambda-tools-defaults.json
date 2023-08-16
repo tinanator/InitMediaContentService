@@ -13,6 +13,6 @@
     "function-runtime"     : "dotnet6",
     "function-architecture" : "x86_64",
     "tracing-mode"          : "PassThrough",
-    "environment-variables" : "",
+    "environment-variables" : "\"LAMBDA_INSIGHTS_LOG_LEVEL\"=\"info\"",
     "image-tag"             : ""
 }
