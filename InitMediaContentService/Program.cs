@@ -3,14 +3,16 @@ using InitMediaContentService.Domain.Extensions;
 using InitMediaContentService.Infrastructure.Persistence.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using InitMediaContentService.Application.Queries;
 using InitMediaContentService.Application.Commands;
 using InitMediaContentService.Application.DTOs;
+using InitMediaContentService;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddMediaContext(builder.Configuration.GetConnectionString("InitMediaContextConnection"));
+string secret = await AWSSecretManager.GetSecret();
+
+builder.Services.AddMediaContext(secret);
 
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
