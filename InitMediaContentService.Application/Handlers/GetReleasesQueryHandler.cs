@@ -6,7 +6,7 @@ using MediatR;
 
 namespace InitMediaContentService.Application.Handlers
 {
-    public class GetReleasesQueryHandler : IRequestHandler<GetReleasesQuery, IEnumerable<ReleaseDTO>>
+    public class GetReleasesQueryHandler : IRequestHandler<GetReleasesQuery, IEnumerable<ReleaseDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ReleaseMapper _releaseMapper;
@@ -15,7 +15,7 @@ namespace InitMediaContentService.Application.Handlers
             _unitOfWork = unitOfWork;
             _releaseMapper = releaseMapper;
         }
-        public async Task<IEnumerable<ReleaseDTO>> Handle(GetReleasesQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ReleaseDto>> Handle(GetReleasesQuery request, CancellationToken cancellationToken)
         {
             var releases = await _unitOfWork.ReleaseRepository.GetAllAsync(cancellationToken);
             return releases.Select(release => _releaseMapper.ReleaseToReleaseDTO(release));

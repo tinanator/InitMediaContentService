@@ -7,7 +7,7 @@ using MediatR;
 
 namespace InitMediaContentService.Application.Handlers
 {
-    public class GetArtistsQueryHandler : IRequestHandler<GetArtistsQuery, IEnumerable<ArtistDTO>>
+    public class GetArtistsQueryHandler : IRequestHandler<GetArtistsQuery, IEnumerable<ArtistDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ArtistMapper _artistMapper;
@@ -16,7 +16,7 @@ namespace InitMediaContentService.Application.Handlers
             _unitOfWork = unitOfWork;
             _artistMapper = artistMapper;
         }
-        public async Task<IEnumerable<ArtistDTO>> Handle(GetArtistsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ArtistDto>> Handle(GetArtistsQuery request, CancellationToken cancellationToken)
         {
             var artists = await _unitOfWork.ArtistRepository.GetAllAsync(cancellationToken);
             return artists.Select(artist => _artistMapper.ArtistToArtistDTO(artist));

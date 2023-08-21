@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InitMediaContentService.Application.DTOs
 {
-    public record TrackDTO
+    public record TrackDto
     {
         public long Id { get; set; }
         public string Name { get; set; }

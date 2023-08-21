@@ -7,7 +7,7 @@ using MediatR;
 
 namespace InitMediaContentService.Application.Handlers
 {
-    public class GetTracksQueryHandler : IRequestHandler<GetTracksQuery, IEnumerable<TrackDTO>>
+    public class GetTracksQueryHandler : IRequestHandler<GetTracksQuery, IEnumerable<TrackDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly TrackMapper _trackMapper;
@@ -16,7 +16,7 @@ namespace InitMediaContentService.Application.Handlers
             _unitOfWork = unitOfWork;
             _trackMapper = trackMapper;
         }
-        public async Task<IEnumerable<TrackDTO>> Handle(GetTracksQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<TrackDto>> Handle(GetTracksQuery request, CancellationToken cancellationToken)
         {
             var tracks = await _unitOfWork.TrackRepository.GetAllAsync(cancellationToken);
             return tracks.Select(track => _trackMapper.TrackToTrackDTO(track));

@@ -8,7 +8,7 @@ using MediatR;
 
 namespace InitMediaContentService.Application.Handlers
 {
-    public class AddTrackCommandHandler : IRequestHandler<AddTrackCommand, TrackDTO>
+    public class AddTrackCommandHandler : IRequestHandler<AddTrackCommand, TrackDto>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly TrackMapper _trackMapper;
@@ -17,7 +17,7 @@ namespace InitMediaContentService.Application.Handlers
             _unitOfWork = unitOfWork;
             _trackMapper = trackMapper;
         }
-        public async Task<TrackDTO> Handle(AddTrackCommand request, CancellationToken cancellationToken)
+        public async Task<TrackDto> Handle(AddTrackCommand request, CancellationToken cancellationToken)
         {
             request.trackDTO.Id = Id.Create();
             var insertedTrack = _unitOfWork.TrackRepository.Insert(_trackMapper.TrackDTOToTrack(request.trackDTO));

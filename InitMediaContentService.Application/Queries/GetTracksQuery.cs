@@ -3,7 +3,7 @@ using MediatR;
 
 namespace InitMediaContentService.Application.Queries
 {
-    public record GetTracksQuery() : IRequest<IEnumerable<TrackDTO>>
+    public record GetTracksQuery() : IRequest<IEnumerable<TrackDto>>
     {
     }
 }

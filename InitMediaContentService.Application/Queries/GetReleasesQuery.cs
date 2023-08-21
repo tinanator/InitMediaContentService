@@ -4,7 +4,7 @@ using MediatR;
 
 namespace InitMediaContentService.Application.Queries
 {
-    public record GetReleasesQuery() : IRequest<IEnumerable<ReleaseDTO>>
+    public record GetReleasesQuery() : IRequest<IEnumerable<ReleaseDto>>
     {
     }
 }

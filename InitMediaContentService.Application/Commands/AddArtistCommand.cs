@@ -3,7 +3,7 @@ using MediatR;
 
 namespace InitMediaContentService.Application.Commands
 {
-    public record AddArtistCommand(ArtistDTO artistDTO) : IRequest<ArtistDTO>
+    public record AddArtistCommand(ArtistDto artistDTO) : IRequest<ArtistDto>
     {
     }
 }
