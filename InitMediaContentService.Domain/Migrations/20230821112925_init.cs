@@ -15,32 +15,34 @@ namespace InitMediaContentService.Domain.Migrations
                 name: "Artist",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    ClusterId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Artist", x => x.Id);
+                    table.PrimaryKey("PK_Artist", x => x.ClusterId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Release",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    ClusterId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    ArtistId = table.Column<int>(type: "integer", nullable: false)
+                    ArtistId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Artist", x => x.Id);
+                    table.PrimaryKey("PK_Release", x => x.ClusterId);
                     table.ForeignKey(
                         name: "FK_Release_Artist_ArtistId",
                         column: x => x.ArtistId,
                         principalTable: "Artist",
-                        principalColumn: "Id",
+                        principalColumn: "ClusterId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -48,26 +50,27 @@ namespace InitMediaContentService.Domain.Migrations
                 name: "Track",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    ClusterId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    ArtistId = table.Column<int>(type: "integer", nullable: false),
-                    ReleaseId = table.Column<int>(type: "integer", nullable: false)
+                    ArtistId = table.Column<long>(type: "bigint", nullable: false),
+                    ReleaseId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Artist", x => x.Id);
+                    table.PrimaryKey("PK_Track", x => x.ClusterId);
                     table.ForeignKey(
                         name: "FK_Track_Artist_ArtistId",
                         column: x => x.ArtistId,
                         principalTable: "Artist",
-                        principalColumn: "Id",
+                        principalColumn: "ClusterId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Track_Release_ReleaseId",
                         column: x => x.ReleaseId,
                         principalTable: "Release",
-                        principalColumn: "Id",
+                        principalColumn: "ClusterId",
                         onDelete: ReferentialAction.Cascade);
                 });
 

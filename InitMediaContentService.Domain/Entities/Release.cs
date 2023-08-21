@@ -4,9 +4,10 @@ namespace InitMediaContentService.Domain.Entities
 {
     public class Release
     {
-        public Guid Id { get; set; }
+        public long ClusterId { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
-        public int ArtistId { get; set; }
+        public long ArtistId { get; set; }
         public Artist Artist { get; set; }
         public ICollection<Track> Tracks { get; set; }
     }

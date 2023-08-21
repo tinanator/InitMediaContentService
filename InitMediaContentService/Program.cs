@@ -22,17 +22,17 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-app.MapGet("/tracks/{id}", async (IMediator mediator, Guid id) =>
+app.MapGet("/tracks/{id}", async (IMediator mediator, long id) =>
 {
     return await mediator.Send(new GetTrackByIdQuery(id));
 });
 
-app.MapGet("/releases/{id}", async (IMediator mediator, Guid id) =>
+app.MapGet("/releases/{id}", async (IMediator mediator, long id) =>
 {
     return await mediator.Send(new GetReleaseByIdQuery(id));
 });
 
-app.MapGet("/artists/{id}", async (IMediator mediator, Guid id) =>
+app.MapGet("/artists/{id}", async (IMediator mediator, long id) =>
 {
     return await mediator.Send(new GetArtistByIdQuery(id));
 });

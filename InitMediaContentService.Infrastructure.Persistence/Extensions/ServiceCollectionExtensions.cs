@@ -9,9 +9,9 @@ namespace InitMediaContentService.Infrastructure.Persistence.Extensions
     {
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IRepository<Track, Guid>, Repository<Track, Guid>>();
-            services.AddScoped<IRepository<Release, Guid>, Repository<Release, Guid>>();
-            services.AddScoped<IRepository<Artist, Guid>, Repository<Artist, Guid>>();
+            services.AddScoped<IRepository<Track, long>, Repository<Track, long>>();
+            services.AddScoped<IRepository<Release, long>, Repository<Release, long>>();
+            services.AddScoped<IRepository<Artist, long>, Repository<Artist, long>>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;

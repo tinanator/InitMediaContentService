@@ -9,7 +9,7 @@ namespace InitMediaContentService.Application.DTOs
 {
     public record ArtistDTO
     {
-        public Guid Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
     }
 }

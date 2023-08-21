@@ -1,4 +1,5 @@
-﻿using InitMediaContentService.Application.Commands;
+﻿using FlakeId;
+using InitMediaContentService.Application.Commands;
 using InitMediaContentService.Application.DTOs;
 using InitMediaContentService.Application.Mappers;
 using InitMediaContentService.Domain.Interfaces;
@@ -18,7 +19,7 @@ namespace InitMediaContentService.Application.Handlers
         }
         public async Task<ReleaseDTO> Handle(AddReleaseCommand request, CancellationToken cancellationToken)
         {
-            request.releaseDTO.Id = NewId.NextGuid();
+            request.releaseDTO.Id = Id.Create();
             var insertedRelease = _unitOfWork.ReleaseRepository.Insert(_releaseMapper.ReleaseDTOToRelease(request.releaseDTO));
             await _unitOfWork.SaveAsync(cancellationToken);
 

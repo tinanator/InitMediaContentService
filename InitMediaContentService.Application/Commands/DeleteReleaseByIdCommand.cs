@@ -2,7 +2,7 @@
 
 namespace InitMediaContentService.Application.Commands
 {
-    public record DeleteReleaseByIdCommand(Guid id) : IRequest
+    public record DeleteReleaseByIdCommand(long id) : IRequest
     {
     }
 }

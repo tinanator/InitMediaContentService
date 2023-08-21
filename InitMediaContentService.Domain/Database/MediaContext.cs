@@ -14,24 +14,27 @@ namespace InitMediaContentService.Database
         public MediaContext(DbContextOptions<MediaContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.UseSerialColumns();
-
             modelBuilder.Entity<Artist>()
                 .ToTable("Artist")
-                .HasKey(x => x.Id)
+                .HasKey(x => x.ClusterId)
                 .HasName("PK_Artist");
             modelBuilder.Entity<Release>()
                 .ToTable("Release")
-                .HasKey(x => x.Id)
-                .HasName("PK_Artist");
+                .HasKey(x => x.ClusterId)
+                .HasName("PK_Release");
             modelBuilder.Entity<Track>()
                 .ToTable("Track")
-                .HasKey(x => x.Id)
-                .HasName("PK_Artist");
+                .HasKey(x => x.ClusterId)
+                .HasName("PK_Track");
 
             modelBuilder.Entity<Artist>()
                 .HasMany(a => a.Releases)
                 .WithOne(r => r.Artist)
+                .HasForeignKey(r => r.ArtistId);
+
+            modelBuilder.Entity<Release>()
+                .HasOne(r => r.Artist)
+                .WithMany(a => a.Releases)
                 .HasForeignKey(r => r.ArtistId);
 
             modelBuilder.Entity<Track>()
@@ -44,9 +47,17 @@ namespace InitMediaContentService.Database
                 .WithMany(a => a.Tracks)
                 .HasForeignKey(t => t.ArtistId);
 
-            modelBuilder.Entity<Artist>().Property(x => x.Name).HasMaxLength(256).IsRequired();
-            modelBuilder.Entity<Release>().Property(x => x.Name).HasMaxLength(256).IsRequired();
-            modelBuilder.Entity<Track>().Property(x => x.Name).HasMaxLength(256).IsRequired();
+            modelBuilder.Entity<Artist>()
+                .Property(x => x.Name)
+                .HasMaxLength(256).IsRequired();
+            modelBuilder.Entity<Release>()
+                .Property(x => x.Name)
+                .HasMaxLength(256)
+                .IsRequired();
+            modelBuilder.Entity<Track>()
+                .Property(x => x.Name)
+                .HasMaxLength(256)
+                .IsRequired();
         }
     }
 }

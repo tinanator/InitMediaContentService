@@ -1,4 +1,5 @@
-﻿using InitMediaContentService.Application.Commands;
+﻿using FlakeId;
+using InitMediaContentService.Application.Commands;
 using InitMediaContentService.Application.DTOs;
 using InitMediaContentService.Application.Mappers;
 using InitMediaContentService.Domain.Interfaces;
@@ -18,7 +19,7 @@ namespace InitMediaContentService.Application.Handlers
         }
         public async Task<ArtistDTO> Handle(AddArtistCommand request, CancellationToken cancellationToken)
         {
-            request.artistDTO.Id = NewId.NextGuid();
+            request.artistDTO.Id = Id.Create();
             var insertedArtist = _unitOfWork.ArtistRepository.Insert(_artistMapper.ArtistDTOToArtist(request.artistDTO));
             await _unitOfWork.SaveAsync(cancellationToken);
 

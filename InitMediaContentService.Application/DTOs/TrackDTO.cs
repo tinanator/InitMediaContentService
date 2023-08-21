@@ -9,9 +9,9 @@ namespace InitMediaContentService.Application.DTOs
 {
     public record TrackDTO
     {
-        public Guid Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
-        public int ArtistId { get; set; }
-        public int ReleaseId { get; set; }
+        public long ArtistId { get; set; }
+        public long ReleaseId { get; set; }
     }
 }

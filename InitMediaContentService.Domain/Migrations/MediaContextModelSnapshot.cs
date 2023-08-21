@@ -19,22 +19,25 @@ namespace InitMediaContentService.Domain.Migrations
                 .HasAnnotation("ProductVersion", "7.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.UseSerialColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("InitMediaContentService.Domain.Entities.Artist", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("ClusterId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseSerialColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ClusterId"));
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
 
-                    b.HasKey("Id")
+                    b.HasKey("ClusterId")
                         .HasName("PK_Artist");
 
                     b.ToTable("Artist", (string)null);
@@ -42,22 +45,25 @@ namespace InitMediaContentService.Domain.Migrations
 
             modelBuilder.Entity("InitMediaContentService.Domain.Entities.Release", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("ClusterId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseSerialColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ClusterId"));
 
-                    b.Property<int>("ArtistId")
-                        .HasColumnType("integer");
+                    b.Property<long>("ArtistId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
 
-                    b.HasKey("Id")
-                        .HasName("PK_Artist");
+                    b.HasKey("ClusterId")
+                        .HasName("PK_Release");
 
                     b.HasIndex("ArtistId");
 
@@ -66,25 +72,28 @@ namespace InitMediaContentService.Domain.Migrations
 
             modelBuilder.Entity("InitMediaContentService.Domain.Entities.Track", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("ClusterId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint");
 
-                    NpgsqlPropertyBuilderExtensions.UseSerialColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ClusterId"));
 
-                    b.Property<int>("ArtistId")
-                        .HasColumnType("integer");
+                    b.Property<long>("ArtistId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
 
-                    b.Property<int>("ReleaseId")
-                        .HasColumnType("integer");
+                    b.Property<long>("ReleaseId")
+                        .HasColumnType("bigint");
 
-                    b.HasKey("Id")
-                        .HasName("PK_Artist");
+                    b.HasKey("ClusterId")
+                        .HasName("PK_Track");
 
                     b.HasIndex("ArtistId");
 

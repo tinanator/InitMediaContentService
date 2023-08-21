@@ -9,9 +9,9 @@ namespace InitMediaContentService.Domain.Interfaces
 {
     public interface IUnitOfWork
     {
-        public IRepository<Artist, Guid> ArtistRepository { get; }
-        public IRepository<Release, Guid> ReleaseRepository { get; }
-        public IRepository<Track, Guid> TrackRepository { get; }
+        public IRepository<Artist, long> ArtistRepository { get; }
+        public IRepository<Release, long> ReleaseRepository { get; }
+        public IRepository<Track, long> TrackRepository { get; }
         Task SaveAsync(CancellationToken cancellationToken);
     }
 }
