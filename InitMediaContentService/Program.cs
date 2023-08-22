@@ -10,9 +10,17 @@ using InitMediaContentService;
 
 var builder = WebApplication.CreateBuilder(args);
 
+#if DEBUG
+
+builder.Services.AddMediaContext(builder.Configuration.GetConnectionString("InitMediaContextConnection"));
+
+#else
+
 string secret = await AWSSecretManager.GetSecret();
 
 builder.Services.AddMediaContext(secret);
+
+#endif
 
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
