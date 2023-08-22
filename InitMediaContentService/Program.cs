@@ -15,17 +15,15 @@ using System.Runtime.InteropServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
-#if DEBUG
-
-builder.Services.AddMediaContext(builder.Configuration.GetConnectionString("InitMediaContextConnection"));
-
-#else
-
-string secret = await AWSSecretManager.GetSecret();
-
-builder.Services.AddMediaContext(secret);
-
-#endif
+if (builder.Environment.IsDevelopment())
+{ 
+    builder.Services.AddMediaContext(builder.Configuration.GetConnectionString("InitMediaContextConnection"));
+} 
+else
+{
+    string secret = await AWSSecretManager.GetSecret();
+    builder.Services.AddMediaContext(secret);
+}
 
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
