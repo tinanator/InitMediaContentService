@@ -17,7 +17,7 @@ namespace InitMediaContentService.Application.Handlers
         }
         public async Task<ReleaseDto> Handle(GetReleaseByIdQuery request, CancellationToken cancellationToken)
         {
-            return _releaseMapper.ReleaseToReleaseDTO(
+            return _releaseMapper.ReleaseToReleaseDto(
                 await _unitOfWork.ReleaseRepository.FindByIdAsync(request.id, cancellationToken)
                 );
         }

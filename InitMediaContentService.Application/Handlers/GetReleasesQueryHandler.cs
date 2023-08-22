@@ -18,7 +18,7 @@ namespace InitMediaContentService.Application.Handlers
         public async Task<IEnumerable<ReleaseDto>> Handle(GetReleasesQuery request, CancellationToken cancellationToken)
         {
             var releases = await _unitOfWork.ReleaseRepository.GetAllAsync(cancellationToken);
-            return releases.Select(release => _releaseMapper.ReleaseToReleaseDTO(release));
+            return releases.Select(release => _releaseMapper.ReleaseToReleaseDto(release));
         }
     }
 }

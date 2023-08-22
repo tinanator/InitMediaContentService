@@ -19,11 +19,11 @@ namespace InitMediaContentService.Application.Handlers
         }
         public async Task<TrackDto> Handle(AddTrackCommand request, CancellationToken cancellationToken)
         {
-            request.trackDTO.Id = Id.Create();
-            var insertedTrack = _unitOfWork.TrackRepository.Insert(_trackMapper.TrackDTOToTrack(request.trackDTO));
+            request.trackDto.Id = Id.Create();
+            var insertedTrack = _unitOfWork.TrackRepository.Insert(_trackMapper.TrackDtoToTrack(request.trackDto));
             await _unitOfWork.SaveAsync(cancellationToken);
 
-            return _trackMapper.TrackToTrackDTO(insertedTrack.Entity);
+            return _trackMapper.TrackToTrackDto(insertedTrack.Entity);
         }
     }
 }

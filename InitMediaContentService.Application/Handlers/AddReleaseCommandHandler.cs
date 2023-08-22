@@ -19,11 +19,11 @@ namespace InitMediaContentService.Application.Handlers
         }
         public async Task<ReleaseDto> Handle(AddReleaseCommand request, CancellationToken cancellationToken)
         {
-            request.releaseDTO.Id = Id.Create();
-            var insertedRelease = _unitOfWork.ReleaseRepository.Insert(_releaseMapper.ReleaseDTOToRelease(request.releaseDTO));
+            request.releaseDto.Id = Id.Create();
+            var insertedRelease = _unitOfWork.ReleaseRepository.Insert(_releaseMapper.ReleaseDtoToRelease(request.releaseDto));
             await _unitOfWork.SaveAsync(cancellationToken);
 
-            return _releaseMapper.ReleaseToReleaseDTO(insertedRelease.Entity);
+            return _releaseMapper.ReleaseToReleaseDto(insertedRelease.Entity);
         }
     }
 }

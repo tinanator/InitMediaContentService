@@ -18,7 +18,7 @@ namespace InitMediaContentService.Application.Handlers
         }
         public async Task<TrackDto> Handle(GetTrackByIdQuery request, CancellationToken cancellationToken)
         {
-            return _trackMapper.TrackToTrackDTO(
+            return _trackMapper.TrackToTrackDto(
                 await _unitOfWork.TrackRepository.FindByIdAsync(request.id, cancellationToken)
                 );
         }

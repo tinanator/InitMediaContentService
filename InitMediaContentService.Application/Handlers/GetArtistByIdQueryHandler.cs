@@ -17,7 +17,7 @@ namespace InitMediaContentService.Application.Handlers
         }
         public async Task<ArtistDto> Handle(GetArtistByIdQuery request, CancellationToken cancellationToken)
         {
-            return _artistMapper.ArtistToArtistDTO(
+            return _artistMapper.ArtistToArtistDto(
                 await _unitOfWork.ArtistRepository.FindByIdAsync(request.id, cancellationToken)
                 );
         }

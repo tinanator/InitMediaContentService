@@ -19,7 +19,7 @@ namespace InitMediaContentService.Application.Handlers
         public async Task<IEnumerable<TrackDto>> Handle(GetTracksQuery request, CancellationToken cancellationToken)
         {
             var tracks = await _unitOfWork.TrackRepository.GetAllAsync(cancellationToken);
-            return tracks.Select(track => _trackMapper.TrackToTrackDTO(track));
+            return tracks.Select(track => _trackMapper.TrackToTrackDto(track));
         }
     }
 }

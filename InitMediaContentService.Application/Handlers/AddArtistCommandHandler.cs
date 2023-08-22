@@ -21,9 +21,11 @@ namespace InitMediaContentService.Application.Handlers
         {
             request.artistDTO.Id = Id.Create();
             var insertedArtist = _unitOfWork.ArtistRepository.Insert(_artistMapper.ArtistDTOToArtist(request.artistDTO));
+            request.artistDto.Id = Id.Create();
+            var insertedArtist = _unitOfWork.ArtistRepository.Insert(_artistMapper.ArtistDtoToArtist(request.artistDto));
             await _unitOfWork.SaveAsync(cancellationToken);
 
-            return _artistMapper.ArtistToArtistDTO(insertedArtist.Entity);
+            return _artistMapper.ArtistToArtistDto(insertedArtist.Entity);
         }
     }
 }

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace InitMediaContentService.Application.Commands
 {
-    public record AddReleaseCommand(ReleaseDto releaseDTO) : IRequest<ReleaseDto>
+    public record AddReleaseCommand(ReleaseDto releaseDto) : IRequest<ReleaseDto>
     {
     }
 }

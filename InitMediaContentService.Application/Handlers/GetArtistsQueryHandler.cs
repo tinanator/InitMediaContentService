@@ -19,7 +19,7 @@ namespace InitMediaContentService.Application.Handlers
         public async Task<IEnumerable<ArtistDto>> Handle(GetArtistsQuery request, CancellationToken cancellationToken)
         {
             var artists = await _unitOfWork.ArtistRepository.GetAllAsync(cancellationToken);
-            return artists.Select(artist => _artistMapper.ArtistToArtistDTO(artist));
+            return artists.Select(artist => _artistMapper.ArtistToArtistDto(artist));
         }
     }
 }

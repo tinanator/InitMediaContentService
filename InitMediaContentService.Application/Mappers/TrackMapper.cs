@@ -7,8 +7,8 @@ namespace InitMediaContentService.Application.Mappers
     [Mapper]
     public partial class TrackMapper
     {
-        public partial TrackDto TrackToTrackDTO(Track track);
+        public partial TrackDto TrackToTrackDto(Track track);
 
-        public partial Track TrackDTOToTrack(TrackDto trackDTO);
+        public partial Track TrackDtoToTrack(TrackDto trackDto);
     }
 }

@@ -7,8 +7,8 @@ namespace InitMediaContentService.Application.Mappers
     [Mapper]
     public partial class ArtistMapper
     {
-        public partial ArtistDto ArtistToArtistDTO(Artist artist);
+        public partial ArtistDto ArtistToArtistDto(Artist artist);
 
-        public partial Artist ArtistDTOToArtist(ArtistDto astistDTO);
+        public partial Artist ArtistDtoToArtist(ArtistDto astistDto);
     }
 }

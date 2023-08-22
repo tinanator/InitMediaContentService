@@ -7,8 +7,8 @@ namespace InitMediaContentService.Application.Mappers
     [Mapper]
     public partial class ReleaseMapper
     {
-        public partial ReleaseDto ReleaseToReleaseDTO(Release release);
+        public partial ReleaseDto ReleaseToReleaseDto(Release release);
 
-        public partial Release ReleaseDTOToRelease(ReleaseDto releaseDTO);
+        public partial Release ReleaseDtoToRelease(ReleaseDto releaseDto);
     }
 }
