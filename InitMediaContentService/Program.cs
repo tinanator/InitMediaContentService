@@ -7,6 +7,11 @@ using InitMediaContentService.Application.Queries;
 using InitMediaContentService.Application.Commands;
 using InitMediaContentService.Application.DTOs;
 using InitMediaContentService;
+using Microsoft.AspNetCore.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
+using InitMediaContentService.Application.Exceptions;
+using System.Net;
+using System.Runtime.InteropServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +36,37 @@ builder.Services.AddApplicationCore();
 var app = builder.Build();
 
 app.UseHttpsRedirection();
+
+if (!builder.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler(exceptionHandlerApp =>
+    {
+        exceptionHandlerApp.Run(async context =>
+        {
+            var exceptionHandlerPathFeature =
+                context.Features.Get<IExceptionHandlerPathFeature>();
+
+            switch (exceptionHandlerPathFeature?.Error)
+            {
+                case ArtistNotFoundException e:
+                    context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                    await context.Response.WriteAsync("The artist not found");
+                    break;
+                case TrackNotFoundException e:
+                    context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                    await context.Response.WriteAsync("The track not found");
+                    break;
+                case ReleaseNotFoundException e:
+                    context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                    await context.Response.WriteAsync("The release not found");
+                    break;
+                default:
+                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    break;
+            }
+        });
+    });
+}
 
 app.MapGet("/tracks/{id}", async (IMediator mediator, long id) =>
 {
@@ -77,19 +113,19 @@ app.MapPost("tracks", async (IMediator mediator, [FromBody] TrackDto trackDto) =
     return await mediator.Send(new AddTrackCommand(trackDto));
 });
 
-app.MapDelete("tracks/{id}", async (IMediator mediator, [FromBody] DeleteTrackByIdCommand command) =>
+app.MapDelete("tracks/{id}", async (IMediator mediator, long id) =>
 {
-    await mediator.Send(command);
+    await mediator.Send(new DeleteTrackByIdCommand(id));
 });
 
-app.MapDelete("artists/{id}", async (IMediator mediator, [FromBody] DeleteArtistByIdCommand command) =>
+app.MapDelete("artists/{id}", async (IMediator mediator, long id) =>
 {
-    await mediator.Send(command);
+    await mediator.Send(new DeleteArtistByIdCommand(id));
 });
 
-app.MapDelete("releases/{id}", async (IMediator mediator, [FromBody] DeleteReleaseByIdCommand command) =>
+app.MapDelete("releases/{id}", async (IMediator mediator, long id) =>
 {
-    await mediator.Send(command);
+    await mediator.Send(new DeleteReleaseByIdCommand(id));
 });
 
 app.Run();

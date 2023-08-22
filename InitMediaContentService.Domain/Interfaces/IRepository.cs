@@ -8,7 +8,7 @@ namespace InitMediaContentService.Domain.Interfaces
         Task<T?> FindByIdAsync(K id, CancellationToken cancellationToken);
         EntityEntry<T> Insert(T obj);
         void Update(T obj);
-        Task DeleteAsync(K id, CancellationToken cancellationToken);
+        Task<bool> DeleteAsync(K id, CancellationToken cancellationToken);
         Task SaveAsync(CancellationToken cancellationToken);
     }
 }

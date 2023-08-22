@@ -35,16 +35,18 @@ namespace InitMediaContentService.Infrastructure.Persistence.Database
             _context.Entry(obj).State = EntityState.Modified;
         }
 
-        public async Task DeleteAsync(K id, CancellationToken cancellationToken)
+        public async Task<bool> DeleteAsync(K id, CancellationToken cancellationToken)
         {
             T? existing = await _context.Set<T>().FindAsync(id, cancellationToken);
 
             if (existing == null)
             {
-                return;
+                return false;
             }
 
             _context.Set<T>().Remove(existing);
+
+            return true;
         }
 
         public async Task SaveAsync(CancellationToken cancellationToken)
