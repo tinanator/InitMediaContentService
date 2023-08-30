@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace InitMediaContentService.Domain.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class a : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -75,14 +75,29 @@ namespace InitMediaContentService.Domain.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Artist_Id",
+                table: "Artist",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Release_ArtistId",
                 table: "Release",
                 column: "ArtistId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Release_Id",
+                table: "Release",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Track_ArtistId",
                 table: "Track",
                 column: "ArtistId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Track_Id",
+                table: "Track",
+                column: "Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Track_ReleaseId",

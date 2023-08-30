@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace InitMediaContentService.Domain.Migrations
 {
     [DbContext(typeof(MediaContext))]
-    [Migration("20230821112925_init")]
-    partial class init
+    [Migration("20230830210735_a")]
+    partial class a
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,8 @@ namespace InitMediaContentService.Domain.Migrations
                     b.HasKey("ClusterId")
                         .HasName("PK_Artist");
 
+                    b.HasIndex("Id");
+
                     b.ToTable("Artist", (string)null);
                 });
 
@@ -69,6 +71,8 @@ namespace InitMediaContentService.Domain.Migrations
                         .HasName("PK_Release");
 
                     b.HasIndex("ArtistId");
+
+                    b.HasIndex("Id");
 
                     b.ToTable("Release", (string)null);
                 });
@@ -99,6 +103,8 @@ namespace InitMediaContentService.Domain.Migrations
                         .HasName("PK_Track");
 
                     b.HasIndex("ArtistId");
+
+                    b.HasIndex("Id");
 
                     b.HasIndex("ReleaseId");
 
