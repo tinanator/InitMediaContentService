@@ -14,6 +14,7 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Configuration;
 using Microsoft.Extensions.Logging.Console;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,18 @@ else
     string secret = await AWSSecretManager.GetSecret();
     builder.Services.AddMediaContext(secret);
 }
+
+builder.Logging.ClearProviders();
+
+var configuration = new ConfigurationBuilder()
+.AddJsonFile("appsettings.json")
+.Build();
+
+var loggerOptions = new LambdaLoggerOptions(configuration);
+
+builder.Logging.AddLambdaLogger(loggerOptions);
+
+builder.Logging.AddConsole();
 
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 

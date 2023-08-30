@@ -2,7 +2,6 @@
 using Amazon.CloudWatchLogs;
 using Amazon.SecretsManager;
 using Amazon.SecretsManager.Model;
-using AWS.Lambda.Powertools.Logging;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Configuration;
 

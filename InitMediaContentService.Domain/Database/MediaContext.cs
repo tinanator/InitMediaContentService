@@ -27,6 +27,10 @@ namespace InitMediaContentService.Database
                 .HasKey(x => x.ClusterId)
                 .HasName("PK_Track");
 
+            modelBuilder.Entity<Track>().HasIndex(e => e.Id);
+            modelBuilder.Entity<Artist>().HasIndex(e => e.Id);
+            modelBuilder.Entity<Release>().HasIndex(e => e.Id);
+
             modelBuilder.Entity<Artist>()
                 .HasMany(a => a.Releases)
                 .WithOne(r => r.Artist)
