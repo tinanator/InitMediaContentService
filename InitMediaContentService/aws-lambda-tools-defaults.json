@@ -13,7 +13,7 @@
     "function-runtime"     : "dotnet6",
     "function-architecture" : "x86_64",
     "tracing-mode"          : "PassThrough",
-    "environment-variables" : "\"LAMBDA_INSIGHTS_LOG_LEVEL\"=\"info\"",
+    "environment-variables" : "\"LAMBDA_INSIGHTS_LOG_LEVEL\"=\"debug\"",
     "image-tag"             : "",
     "function-role"         : "arn:aws:iam::077036539573:role/initMediaService",
     "function-subnets"      : "subnet-0d9618e456672ce69,subnet-0f259dd7bc3758de2",

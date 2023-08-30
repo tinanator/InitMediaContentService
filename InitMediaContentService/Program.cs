@@ -12,13 +12,15 @@ using static System.Net.Mime.MediaTypeNames;
 using InitMediaContentService.Application.Exceptions;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Configuration;
+using Microsoft.Extensions.Logging.Console;
 
 var builder = WebApplication.CreateBuilder(args);
 
 if (builder.Environment.IsDevelopment())
-{ 
+{
     builder.Services.AddMediaContext(builder.Configuration.GetConnectionString("InitMediaContextConnection"));
-} 
+}
 else
 {
     string secret = await AWSSecretManager.GetSecret();
