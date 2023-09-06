@@ -15,36 +15,30 @@ using System.Runtime.InteropServices;
 using System.Configuration;
 using Microsoft.Extensions.Logging.Console;
 using Microsoft.Extensions.Logging;
+using InitMediaContentService.Domain;
+using FlakeId;
+using Microsoft.EntityFrameworkCore.Internal;
 
 var builder = WebApplication.CreateBuilder(args);
 
 if (builder.Environment.IsDevelopment())
 {
-    builder.Services.AddMediaContext(builder.Configuration.GetConnectionString("InitMediaContextConnection"));
+    await builder.Services.AddMediaContext(new LocalSecretStorage(builder), "InitMediaContextConnection");
 }
 else
 {
-    string secret = await AWSSecretManager.GetSecret();
-    builder.Services.AddMediaContext(secret);
+    await builder.Services.AddMediaContext(new AwsSecretStorage(), "prod/initMediaContent/DB");
 }
 
 builder.Logging.ClearProviders();
-
-var configuration = new ConfigurationBuilder()
-.AddJsonFile("appsettings.json")
-.Build();
-
-var loggerOptions = new LambdaLoggerOptions(configuration);
-
-builder.Logging.AddLambdaLogger(loggerOptions);
-
-builder.Logging.AddConsole();
 
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 
 builder.Services.AddRepositories();
 
 builder.Services.AddApplicationCore();
+
+builder.Logging.AddAWSProvider();
 
 var app = builder.Build();
 
@@ -141,4 +135,22 @@ app.MapDelete("releases/{id}", async (IMediator mediator, long id) =>
     await mediator.Send(new DeleteReleaseByIdCommand(id));
 });
 
+app.MapPost("getNewMedia", async([FromBody] Media request) =>
+{
+    ArtistDto artistDto = new ArtistDto
+    {
+        Name = request.Artist
+    };
+
+    var m = new Mediator(builder.Services.BuildServiceProvider());
+    var addedArtist = await m.Send(new AddArtistCommand(artistDto));
+
+    return request;
+});
+
 app.Run();
+
+public class Media
+{
+    public string Artist { get; set; }
+}
